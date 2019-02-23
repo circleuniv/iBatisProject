@@ -1,0 +1,9 @@
+﻿<sqlMap namespace="MyTestDB" xmlns="http://ibatis.apache.org/mapping"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <statements>
+    <select id="CourseAll" resultClass="Hashtable" parameterClass="Hashtable">
+      select * from course
+      where course_id = #CourseId#
+    </select>
+  </statements>
+</sqlMap>

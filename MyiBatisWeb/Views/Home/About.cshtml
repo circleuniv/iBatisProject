@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MyiBatisWeb.Models.MetaTable.StudentViewModel>
+@using System.Collections;
+@using MyiBatisWeb.Models.MetaTable;
+
+
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+
+
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Birthday)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var oneoflist in Model)
+            {
+            <tr>
+                <td>@oneoflist.StudId</td>
+                <td>@oneoflist.Name</td>
+                <td>@oneoflist.Birthday.ToString()</td>
+                <td>@oneoflist.Email</td>
+                <td>@Html.ActionLink("Edit", "Edit", new { id = oneoflist.StudId })</td>
+                <td>@Html.ActionLink("Details", "Details", new { id = oneoflist.StudId })</td>
+                <td>@Html.ActionLink("Delete", "Delete", new { id = oneoflist.StudId })</td>
+            </tr>
+            }
+        </tbody>
+    </table>

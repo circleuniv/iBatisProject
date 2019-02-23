@@ -1,0 +1,31 @@
+﻿<sqlMap namespace="MyTestDB" xmlns="http://ibatis.apache.org/mapping"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+  <!--<statements>
+    <select id="StudentOne" resultClass="Hashtable" parameterClass="Hashtable">
+      select * from student
+      where stud_id = #StuId#
+    </select>
+    <select id="StudentAll" resultClass="Hashtable" parameterClass="Hashtable">
+      select * from student      
+    </select>
+  </statements>-->
+
+  <alias>
+    <!-- alias:取別名
+                    assembly:表示類所在的文件
+                    type:表示該類的完整名稱
+      -->
+    <typeAlias alias="StudentViewModel" assembly="MyiBatisWeb.Models.MetaTable" type="MyiBatisWeb.Models.MetaTable.StudentViewModel" />
+  </alias>
+
+  <statements>
+    <select id="StudentOne" resultClass="StudentViewModel" parameterClass="StudentViewModel">
+      select * from student
+      where stud_id = #StudId#
+    </select>
+   
+    <select id="StudentAll" resultClass="StudentViewModel">
+      select A.stud_id as StudId, A.name as Name, A.birthday as Birthday, A.email as Email from student as A
+    </select>
+  </statements>
+</sqlMap>
