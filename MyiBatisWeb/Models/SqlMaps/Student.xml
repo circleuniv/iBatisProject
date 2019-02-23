@@ -20,12 +20,31 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
 
   <statements>
     <select id="StudentOne" resultClass="StudentViewModel" parameterClass="StudentViewModel">
-      select * from student
-      where stud_id = #StudId#
+      select A.stud_id as StudId, A.name as Name, A.birthday as Birthday, A.email as Email from student as A
+      where  A.stud_id = #StudId#
     </select>
    
     <select id="StudentAll" resultClass="StudentViewModel">
       select A.stud_id as StudId, A.name as Name, A.birthday as Birthday, A.email as Email from student as A
     </select>
+
+    <update id="UpdateStudent" parameterClass="StudentViewModel">
+      UPDATE student
+      SET name = #Name#, birthday=#Birthday#, email=#Email#
+      where stud_id=#StudId#      
+      <selectKey resultClass="int" type="post" property="ROWCOUNT" >
+        select @@ROWCOUNT as value
+      </selectKey>
+    </update>
+
+    <delete id="DeleteStudent" parameterClass="int">
+      DELETE FROM student
+      where stud_id=#StudId#
+      <selectKey resultClass="int" type="post" property="ROWCOUNT" >
+        select @@ROWCOUNT as value
+      </selectKey>
+    </delete>
+
+   
   </statements>
 </sqlMap>

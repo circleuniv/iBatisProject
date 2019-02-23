@@ -104,23 +104,23 @@ namespace MyiBatisWeb.Models
         //    return 0;
         //}
 
-        //public int Update<T>(string statementName, object parameterObject = null)
-        //{
-        //    if (iSqlMapper != null)
-        //    {
-        //        return iSqlMapper.Update(statementName, parameterObject);
-        //    }
-        //    return 0;
-        //}
+        public int Update(string statementname, object parameterobject = null)
+        {
+            if (iSqlMapper != null)
+            {
+                return iSqlMapper.Update(statementname, parameterobject);
+            }
+            return 0;
+        }
 
-        //public int Delete(string statementName, string primaryKeyId)
-        //{
-        //    if (iSqlMapper != null)
-        //    {
-        //        return iSqlMapper.Delete(statementName, primaryKeyId);
-        //    }
-        //    return 0;
-        //}
+        public int Delete(string statementName, string primaryKeyId)
+        {
+            if (iSqlMapper != null)
+            {
+                return iSqlMapper.Delete(statementName, primaryKeyId);
+            }
+            return 0;
+        }
 
         //public int Delete<T>(string statementName, object parameterObject = null)
         //{

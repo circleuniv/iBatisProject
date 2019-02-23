@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MyiBatisWeb.Models;
@@ -50,8 +51,12 @@ namespace MyiBatisWeb.Controllers
 
         [HttpPost]
         public ActionResult Edit(StudentViewModel svm)
-        {   
-            return RedirectToAction("About");
+        {
+            int updatecount = new BaseAccess_MyTestDB().Update("UpdateStudent", svm);
+            if (updatecount > 0)
+                return RedirectToAction("About");
+            else
+                return View(svm);
         }
 
         public IList<StudentViewModel> GetMoreRecord()
@@ -64,6 +69,19 @@ namespace MyiBatisWeb.Controllers
             //    ViewData["List"] = GetMoreStud;
             //}
             return GetMoreStud;
+        }
+
+      
+
+
+        [HttpPost]
+        public ActionResult Delete(string id)
+        {
+            int delcount = new BaseAccess_MyTestDB().Delete("DeleteStudent", id);
+            if (delcount > 0)
+                return RedirectToAction("About");
+            else
+                throw new Exception("something went wrong!");
         }
 
 

@@ -6,6 +6,12 @@
 @{
     ViewBag.Title = "About";
 }
+<script type="text/javascript">
+    function delStu(stid) {
+        alert(stid);
+        return true;
+    }
+</script>
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
@@ -41,7 +47,7 @@
                 <td>@oneoflist.Email</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { id = oneoflist.StudId })</td>
                 <td>@Html.ActionLink("Details", "Details", new { id = oneoflist.StudId })</td>
-                <td>@Html.ActionLink("Delete", "Delete", new { id = oneoflist.StudId })</td>
+                <td>@Html.ActionLink("Delete", "About", null,  new { onclick="return delStu('"+ oneoflist.StudId + "');" })</td>
             </tr>
             }
         </tbody>
