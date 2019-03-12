@@ -11,7 +11,7 @@ namespace MyiBatisWeb.Models.MetaTable
     {
         [Key]
         [DisplayName("學號")]
-        public string StudId { get; set; }
+        public int StudId { get; set; }
         [DisplayName("姓名")]
         public string Name { get; set; }
         [DisplayName("生日")]

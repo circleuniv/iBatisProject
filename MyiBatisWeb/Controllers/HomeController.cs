@@ -32,7 +32,7 @@ namespace MyiBatisWeb.Controllers
             return View();
         }
 
-        public ActionResult Details(string id) {
+        public ActionResult Details(int id) {
 
             StudentViewModel svm = new StudentViewModel();
             svm.StudId = id;
@@ -41,7 +41,7 @@ namespace MyiBatisWeb.Controllers
         }
 
         [HttpGet]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
             StudentViewModel svm = new StudentViewModel();
             svm.StudId = id;
@@ -57,6 +57,29 @@ namespace MyiBatisWeb.Controllers
                 return RedirectToAction("About");
             else
                 return View(svm);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(StudentViewModel svm)
+        {
+            if (ModelState.IsValid)
+            {
+                int CreateID = new BaseAccess_MyTestDB().Insert<StudentViewModel>("InsertStudent", svm);
+                if (CreateID > 0)
+                    return RedirectToAction("About");
+                else
+                    return View(svm);
+            }
+            else
+            {
+                return View(svm);
+            }
+
         }
 
         public IList<StudentViewModel> GetMoreRecord()
@@ -75,11 +98,11 @@ namespace MyiBatisWeb.Controllers
 
 
         [HttpPost]
-        public ActionResult Delete(string id)
+        public JsonResult Delete(string id)
         {
             int delcount = new BaseAccess_MyTestDB().Delete("DeleteStudent", id);
             if (delcount > 0)
-                return RedirectToAction("About");
+                return Json(new { result = "Redirect", url = Url.Action("About", "Home") });
             else
                 throw new Exception("something went wrong!");
         }

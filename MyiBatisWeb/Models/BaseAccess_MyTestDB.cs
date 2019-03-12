@@ -88,21 +88,21 @@ namespace MyiBatisWeb.Models
         ////    return 0;
         ////}
 
-        //public int Insert<T>(string statementName, object parameterObject = null)
-        //{
-        //    if (iSqlMapper != null)
-        //    {
-        //        try
-        //        {
-        //            return (int)iSqlMapper.Insert(statementName, parameterObject);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return 0;
-        //        }
-        //    }
-        //    return 0;
-        //}
+        public int Insert<StudentViewModel>(string statementName, object parameterObject = null)
+        {
+            if (iSqlMapper != null)
+            {
+                try
+                {
+                    return (int)iSqlMapper.Insert(statementName, parameterObject);
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
+            return 0;
+        }
 
         public int Update(string statementname, object parameterobject = null)
         {

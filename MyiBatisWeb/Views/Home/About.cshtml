@@ -8,8 +8,23 @@
 }
 <script type="text/javascript">
     function delStu(stid) {
-        alert(stid);
-        return true;
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Delete", "Home")',
+            data: { id: stid },
+            success: function (resp) {
+                if (resp.result == 'Redirect') {
+                    alert('刪除成功!');
+                    window.location.href = resp.url;                  
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $("body").append(xhr.status);
+                $("body").append(xhr.responseText);
+                alert("Ajax發生錯誤!");
+            }
+        });
+        return false;
     }
 </script>
 <h2>@ViewBag.Title.</h2>
@@ -18,28 +33,28 @@
 <p>Use this area to provide additional information.</p>
 
 
-
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.StudId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Birthday)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>操作</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var oneoflist in Model)
-            {
+<p>@Html.ActionLink("新增", "Create")</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.StudId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var oneoflist in Model)
+        {
             <tr>
                 <td>@oneoflist.StudId</td>
                 <td>@oneoflist.Name</td>
@@ -47,8 +62,8 @@
                 <td>@oneoflist.Email</td>
                 <td>@Html.ActionLink("Edit", "Edit", new { id = oneoflist.StudId })</td>
                 <td>@Html.ActionLink("Details", "Details", new { id = oneoflist.StudId })</td>
-                <td>@Html.ActionLink("Delete", "About", null,  new { onclick="return delStu('"+ oneoflist.StudId + "');" })</td>
+                <td>@Html.ActionLink("Delete", "", null, new { onclick = "return delStu('" + oneoflist.StudId + "');" })</td>
             </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>

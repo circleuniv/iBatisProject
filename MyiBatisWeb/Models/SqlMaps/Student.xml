@@ -45,6 +45,19 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
       </selectKey>
     </delete>
 
+
+    <insert id="InsertStudent" parameterClass="StudentViewModel" useGeneratedKeys="true" keyProperty="stud_id" >
+      INSERT INTO student(name ,birthday, email) VALUES (#Name#, #Birthday#, #Email#)
+      <selectKey resultClass="int" type="post" property="StudId">
+        SELECT @@IDENTITY AS value
+      </selectKey>
+    </insert>
+
+    <!--
+    <insert id="InsertStudent" parameterClass="StudentViewModel" useGeneratedKeys="true" keyProperty="stud_id" >
+      INSERT INTO student(name ,birthday, email) VALUES (#Name#, #Birthday#, #Email#)           
+    </insert>
+    -->
    
   </statements>
 </sqlMap>
